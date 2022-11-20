@@ -24,8 +24,7 @@ import io.spring.initializr.versionresolver.DependencyManagementVersionResolver;
 import io.spring.start.site.project.ProjectDescriptionCustomizerConfiguration;
 import io.spring.start.site.support.CacheableDependencyManagementVersionResolver;
 import io.spring.start.site.support.StartInitializrMetadataUpdateStrategy;
-import io.spring.start.site.web.HomeController;
-
+import io.spring.start.site.web.WebConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -52,8 +51,8 @@ public class StartApplication {
 	}
 
 	@Bean
-	public HomeController homeController() {
-		return new HomeController();
+	public WebConfig webConfig() {
+		return new WebConfig();
 	}
 
 	@Bean

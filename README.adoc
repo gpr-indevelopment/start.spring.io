@@ -67,6 +67,12 @@ easily start the app as any other Spring Boot app:
     $ cd start-site
     $ ../mvnw spring-boot:run
 ----
+Alternatively, you can choose the port for the server application with debugging capabilities:
+
+[indent=0]
+----
+    $ ../mvnw spring-boot:run -Drun.jvmArguments='-Dserver.port=8081 -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005'
+----
 
 [[run-ide]]
 === Running the app in an IDE

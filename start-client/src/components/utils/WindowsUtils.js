@@ -6,7 +6,7 @@ function getProperties() {
       window.navigator.userAgent.toLowerCase().indexOf('mac') > -1
         ? '⌘'
         : 'Ctrl',
-    origin: window.location.origin,
+    origin: process.env.NODE_ENV === "development" ? window.location.origin : "http://localhost:8081",
     height: window.innerHeight,
     width: window.innerWidth,
   }
