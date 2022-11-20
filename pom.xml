@@ -25,6 +25,7 @@
 	<modules>
 		<module>start-client</module>
 		<module>start-site</module>
+		<module>isolated-frontend-server</module>
 	</modules>
 
 	<profiles>
