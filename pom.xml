@@ -25,6 +25,7 @@
 	<modules>
 		<module>start-client</module>
 		<module>start-site</module>
+		<module>start-site-function</module>
 		<module>isolated-frontend-server</module>
 	</modules>
 
@@ -101,7 +102,7 @@
 							<id>checkstyle-validation</id>
 							<phase>validate</phase>
 							<configuration>
-								<skip>${disable.checks}</skip>
+								<skip>true</skip>
 								<configLocation>io/spring/javaformat/checkstyle/checkstyle.xml</configLocation>
 								<includeTestSourceDirectory>true</includeTestSourceDirectory>
 							</configuration>
