@@ -113,20 +113,20 @@ initializr:
           - compatibilityRange: "[3.0.0-RC1,3.0.0-RC2)"
             version: 2022.0.0-RC1
             repositories: spring-milestones
-          - compatibilityRange: "[3.0.0-RC2,3.1.0-M1)"
+          - compatibilityRange: "[3.0.0-RC2,3.0.0)"
             version: 2022.0.0-RC2
             repositories: spring-milestones
+          - compatibilityRange: "[3.0.0,3.1.0-M1)"
+            version: 2022.0.0
       spring-cloud-azure:
         groupId: com.azure.spring
         artifactId: spring-cloud-azure-dependencies
         versionProperty: spring-cloud-azure.version
         mappings:
-          - compatibilityRange: "[2.5.0.M1,2.7.0-M1)"
-            version: 4.3.0
-          - compatibilityRange: "[2.7.0-M1,3.0.0-M1)"
-            version: 4.4.1
+          - compatibilityRange: "[2.5.0.M1,3.0.0-M1)"
+            version: 4.5.0
           - compatibilityRange: "[3.0.0-M1,3.1.0-M1)"
-            version: 6.0.0-beta.3
+            version: 6.0.0-beta.4
       spring-cloud-gcp:
         groupId: com.google.cloud
         artifactId: spring-cloud-gcp-dependencies
@@ -136,7 +136,7 @@ initializr:
           - compatibilityRange: "[2.4.0-M1,2.6.0-M1)"
             version: 2.0.11
           - compatibilityRange: "[2.6.0-M1,3.0.0-M1)"
-            version: 3.4.0
+            version: 3.4.1
       spring-cloud-services:
         groupId: io.pivotal.spring.cloud
         artifactId: spring-cloud-services-dependencies
@@ -153,6 +153,8 @@ initializr:
             version: 3.4.0
           - compatibilityRange: "[2.7.0-M1,3.0.0-M1)"
             version: 3.5.0
+          - compatibilityRange: "[3.0.0,3.1.0-M1)"
+            version: 4.0.0
       spring-shell:
         groupId: org.springframework.shell
         artifactId: spring-shell-dependencies
@@ -174,9 +176,11 @@ initializr:
         versionProperty: vaadin.version
         mappings:
           - compatibilityRange: "[2.1.0.RELEASE,2.6.0-M1)"
-            version: 14.9.2
-          - compatibilityRange: "[2.6.0-M1,2.8.0-M1)"
-            version: 23.2.10
+            version: 14.9.4
+          - compatibilityRange: "[2.6.0-M1,2.7.0-M1)"
+            version: 23.2.13
+          - compatibilityRange: "[2.7.0-M1,2.8.0-M1)"
+            version: 23.3.3
       wavefront:
         groupId: com.wavefront
         artifactId: wavefront-spring-boot-bom
@@ -282,8 +286,10 @@ initializr:
               repository: spring-releases
             - compatibilityRange: "[2.7.0-M1,2.7.1)"
               version: 0.12.0
-            - compatibilityRange: "[2.7.1,3.0.0-M1)"
+            - compatibilityRange: "[2.7.1,2.7.6)"
               version: 0.12.1
+            - compatibilityRange: "[2.7.6,3.0.0-M1)"
+              version: 0.12.2
             - compatibilityRange: "3.0.0-M1"
               groupId: org.springframework.boot
               artifactId: spring-boot
@@ -430,7 +436,7 @@ initializr:
               href: https://spring.io/guides/gs/crud-with-vaadin/
               description: Creating CRUD UI with Vaadin
             - rel: reference
-              href: https://vaadin.com/spring
+              href: https://vaadin.com/docs
     - name: Template Engines
       content:
         - name: Thymeleaf
@@ -916,7 +922,7 @@ initializr:
             - compatibilityRange: "[2.6.0.M1,2.7.0-M1)"
               version: 3.17.0
             - compatibilityRange: "[2.7.0.M1,3.0.0-M1)"
-              version: 3.19.0
+              version: 3.20.1
           description: Apache Camel is an open source integration framework that empowers you to quickly and easily integrate various systems consuming or producing data.
           groupId: org.apache.camel.springboot
           artifactId: camel-spring-boot-starter
@@ -986,11 +992,11 @@ initializr:
           id: picocli
           groupId: info.picocli
           artifactId: picocli-spring-boot-starter
-          compatibilityRange: "[2.4.0.RELEASE,3.0.0-M1)"
+          compatibilityRange: "[2.5.0.RELEASE,3.1.0-M1)"
           description: Build command line applications with picocli.
           mappings:
-            - compatibilityRange: "[2.4.0.RELEASE,3.0.0-M1)"
-              version: 4.6.3
+            - compatibilityRange: "[2.5.0.RELEASE,3.1.0-M1)"
+              version: 4.7.0
           links:
             - rel: reference
               href: https://picocli.info/#_spring_boot_example
