@@ -16,15 +16,12 @@
 
 package io.spring.start.site.support;
 
-import java.util.List;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.spring.initializr.generator.test.InitializrMetadataTestBuilder;
 import io.spring.initializr.metadata.DefaultMetadataElement;
 import io.spring.initializr.metadata.InitializrMetadata;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -32,6 +29,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
@@ -69,13 +68,11 @@ class StartInitializrMetadataUpdateStrategyTests {
 		InitializrMetadata updatedMetadata = provider.update(metadata);
 		assertThat(updatedMetadata.getBootVersions()).isNotNull();
 		List<DefaultMetadataElement> updatedBootVersions = updatedMetadata.getBootVersions().getContent();
-		assertThat(updatedBootVersions).hasSize(6);
-		assertBootVersion(updatedBootVersions.get(0), "3.0.0 (SNAPSHOT)", false);
-		assertBootVersion(updatedBootVersions.get(1), "3.0.0 (M3)", false);
-		assertBootVersion(updatedBootVersions.get(2), "2.7.0 (SNAPSHOT)", false);
-		assertBootVersion(updatedBootVersions.get(3), "2.7.0 (RC1)", false);
-		assertBootVersion(updatedBootVersions.get(4), "2.6.8 (SNAPSHOT)", false);
-		assertBootVersion(updatedBootVersions.get(5), "2.6.7", true);
+		assertThat(updatedBootVersions).hasSize(4);
+		assertBootVersion(updatedBootVersions.get(0), "3.0.2 (SNAPSHOT)", false);
+		assertBootVersion(updatedBootVersions.get(1), "3.0.1", true);
+		assertBootVersion(updatedBootVersions.get(2), "2.7.8 (SNAPSHOT)", false);
+		assertBootVersion(updatedBootVersions.get(3), "2.7.7", false);
 	}
 
 	@Test

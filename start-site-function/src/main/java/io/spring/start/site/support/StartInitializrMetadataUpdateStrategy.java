@@ -16,16 +16,15 @@
 
 package io.spring.start.site.support;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.spring.initializr.generator.version.Version;
 import io.spring.initializr.metadata.DefaultMetadataElement;
 import io.spring.initializr.web.support.InitializrMetadataUpdateStrategy;
 import io.spring.initializr.web.support.SaganInitializrMetadataUpdateStrategy;
-
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * An {@link InitializrMetadataUpdateStrategy} that performs additional filtering of
@@ -41,14 +40,18 @@ public class StartInitializrMetadataUpdateStrategy extends SaganInitializrMetada
 
 	@Override
 	protected List<DefaultMetadataElement> fetchSpringBootVersions(String url) {
-		List<DefaultMetadataElement> versions = super.fetchSpringBootVersions(url);
+		if (url == null) {
+			return null;
+		}
+		List<DefaultMetadataElement> versions = super.fetchSpringBootVersions(
+				"https://spring.io/project_metadata/spring-boot-static");
 		return (versions != null) ? versions.stream().filter(this::isCompatibleVersion).collect(Collectors.toList())
 				: null;
 	}
 
 	private boolean isCompatibleVersion(DefaultMetadataElement versionMetadata) {
 		Version version = Version.parse(versionMetadata.getId());
-		return (version.getMajor() == 2 && version.getMinor() > 5) || (version.getMajor() >= 3);
+		return (version.getMajor() == 2 && version.getMinor() > 6) || (version.getMajor() >= 3);
 	}
 
 }
