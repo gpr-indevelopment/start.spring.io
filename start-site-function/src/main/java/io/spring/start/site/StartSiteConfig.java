@@ -43,11 +43,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @Import(ProjectDescriptionCustomizerConfiguration.class)
 @EnableCaching
 @EnableAsync
-public class StartApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(StartApplication.class, args);
-	}
+public class StartSiteConfig {
 
 	@Bean
 	public WebConfig webConfig() {

@@ -40,13 +40,13 @@ import org.springframework.http.ResponseEntity;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * General integration tests for {@link StartApplication}.
+ * General integration tests for {@link StartSiteConfig}.
  *
  * @author Stephane Nicoll
  */
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureCache
-class StartApplicationIntegrationTests {
+class StartSiteConfigIntegrationTests {
 
 	@Autowired
 	private TestRestTemplate restTemplate;
