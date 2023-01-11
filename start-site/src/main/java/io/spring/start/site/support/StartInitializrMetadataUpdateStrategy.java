@@ -41,6 +41,9 @@ public class StartInitializrMetadataUpdateStrategy extends SaganInitializrMetada
 
 	@Override
 	protected List<DefaultMetadataElement> fetchSpringBootVersions(String url) {
+		if (url == null) {
+			return null;
+		}
 		List<DefaultMetadataElement> versions = super.fetchSpringBootVersions("https://spring.io/project_metadata/spring-boot-static");
 		return (versions != null) ? versions.stream().filter(this::isCompatibleVersion).collect(Collectors.toList())
 				: null;
