@@ -12,7 +12,12 @@
 	<name>start.spring.io function</name>
 
 	<properties>
+		<wrapper.version>1.0.27.RELEASE</wrapper.version>
 		<maven.test.skip>true</maven.test.skip>
+		<java.version>17</java.version>
+		<java.revision>${project.version}</java.revision>
+		<os.platform>al2</os.platform>
+		<initializer-version>0.20.0-SNAPSHOT-static</initializer-version>
 	</properties>
 
 	<dependencyManagement>
@@ -47,20 +52,17 @@
 		<dependency>
 			<groupId>io.spring.initializr</groupId>
 			<artifactId>initializr-generator-spring</artifactId>
+			<version>${initializer-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.spring.initializr</groupId>
 			<artifactId>initializr-version-resolver</artifactId>
+			<version>${initializer-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.spring.initializr</groupId>
 			<artifactId>initializr-web</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>io.spring.start</groupId>
-			<artifactId>start-client</artifactId>
-			<scope>runtime</scope>
+			<version>${initializer-version}</version>
 		</dependency>
 
 		<dependency>
@@ -89,44 +91,19 @@
 		<finalName>start-site</finalName>
 		<plugins>
 			<plugin>
-				<groupId>io.spring.javaformat</groupId>
-				<artifactId>spring-javaformat-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-checkstyle-plugin</artifactId>
-			</plugin>
-			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<fork>false</fork>
+					<additionalProperties>
+						<versions.spring-boot>${project.parent.parent.version}</versions.spring-boot>
+						<versions.initializr>${spring-initializr.version}</versions.initializr>
+					</additionalProperties>
 				</configuration>
-				<executions>
-					<execution>
-						<id>build-info</id>
-						<goals>
-							<goal>build-info</goal>
-						</goals>
-						<configuration>
-							<additionalProperties>
-								<versions.spring-boot>${project.parent.parent.version}</versions.spring-boot>
-								<versions.initializr>${spring-initializr.version}</versions.initializr>
-							</additionalProperties>
-						</configuration>
-					</execution>
-					<execution>
-						<id>repackage</id>
-						<configuration>
-							<classifier>exec</classifier>
-						</configuration>
-					</execution>
-				</executions>
 				<dependencies>
 					<dependency>
 						<groupId>org.springframework.boot.experimental</groupId>
 						<artifactId>spring-boot-thin-layout</artifactId>
-						<version>1.0.27.RELEASE</version>
+						<version>${wrapper.version}</version>
 					</dependency>
 				</dependencies>
 			</plugin>
@@ -141,8 +118,42 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>pl.project13.maven</groupId>
-				<artifactId>git-commit-id-plugin</artifactId>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.40.3</version>
+				<executions>
+					<execution>
+						<id>docker-build</id>
+						<goals>
+							<goal>build</goal>
+						</goals>
+						<phase>package</phase>
+					</execution>
+				</executions>
+				<configuration>
+					<images>
+						<image>
+							<build>
+								<dockerFileDir>${project.basedir}</dockerFileDir>
+								<args>
+									<JAVA_VERSION>${java.version}</JAVA_VERSION>
+									<JAVA_REVISION>${java.revision}</JAVA_REVISION>
+									<OS_PLATFORM>${os.platform}</OS_PLATFORM>
+								</args>
+								<tags>
+									<tag>${java.revision}</tag>
+									<tag>${java.revision}-${os.platform}</tag>
+								</tags>
+								<labels>
+									<java.version>${java.version}</java.version>
+									<java.revision>${java.revision}</java.revision>
+									<os.platform>${os.platform}</os.platform>
+								</labels>
+							</build>
+							<name>${aws.account}.dkr.ecr.${aws.region}.amazonaws.com/start-site-function</name>
+						</image>
+					</images>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

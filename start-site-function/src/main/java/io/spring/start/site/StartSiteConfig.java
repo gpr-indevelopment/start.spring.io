@@ -23,8 +23,6 @@ import io.spring.initializr.versionresolver.DependencyManagementVersionResolver;
 import io.spring.start.site.project.ProjectDescriptionCustomizerConfiguration;
 import io.spring.start.site.support.CacheableDependencyManagementVersionResolver;
 import io.spring.start.site.support.StartInitializrMetadataUpdateStrategy;
-import io.spring.start.site.web.WebConfig;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -44,11 +42,6 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @EnableCaching
 @EnableAsync
 public class StartSiteConfig {
-
-	@Bean
-	public WebConfig webConfig() {
-		return new WebConfig();
-	}
 
 	@Bean
 	public StartInitializrMetadataUpdateStrategy initializrMetadataUpdateStrategy(
