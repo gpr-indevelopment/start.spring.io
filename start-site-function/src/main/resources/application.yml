@@ -1,24 +1,9 @@
 logging:
   level:
-    org.springframework.core.env: warn
-    org.springframework.jndi: warn
-
-management:
-  info:
-    env:
-      enabled: true
-  endpoints:
-    web:
-      exposure:
-        include:
-          - health
-          - info
+    org.springframework.core.env: info
+    org.springframework.jndi: info
 
 server:
-  compression:
-    enabled: true
-    mime-types: application/json,text/css,text/html
-    min-response-size: 2048
   error:
     include-message: always
   forward-headers-strategy: native
