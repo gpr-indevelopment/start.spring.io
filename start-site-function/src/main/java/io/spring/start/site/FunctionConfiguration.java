@@ -1,14 +1,19 @@
 package io.spring.start.site;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.spring.initializr.metadata.DependencyMetadataProvider;
+import io.spring.initializr.metadata.InitializrMetadata;
+import io.spring.initializr.metadata.InitializrMetadataBuilder;
 import io.spring.initializr.metadata.InitializrMetadataProvider;
+import io.spring.initializr.metadata.InitializrProperties;
 import io.spring.initializr.web.controller.ProjectMetadataController;
+import io.spring.initializr.web.support.DefaultInitializrMetadataProvider;
 import io.spring.start.site.project.ProjectDescriptionCustomizerConfiguration;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.spring.start.site.support.StartInitializrMetadataUpdateStrategy;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
@@ -23,12 +28,6 @@ import java.util.function.Function;
 @EnableAsync
 public class FunctionConfiguration {
 
-	@Autowired
-	private InitializrMetadataProvider initializrMetadataProvider;
-
-	@Autowired
-	private DependencyMetadataProvider dependencyMetadataProvider;
-
 	/*
 	 * You need this main method (empty) or explicit <start-class>example.FunctionConfiguration</start-class>
 	 * in the POM to ensure boot plug-in makes the correct entry
@@ -37,23 +36,28 @@ public class FunctionConfiguration {
 		SpringApplication.run(FunctionConfiguration.class, args);
 	}
 
-	/*@Bean
-	public Function<String, String> test() {
-		return value -> {
-			if (value.equals("exception")) {
-				throw new RuntimeException("Intentional exception");
-			}
-			else {
-				return value.toUpperCase();
-			}
-		};
-	}*/
+	@Bean
+	public ProjectMetadataController projectMetadataController(InitializrMetadataProvider metadataProvider,
+														DependencyMetadataProvider dependencyMetadataProvider) {
+		return new ProjectMetadataController(metadataProvider, dependencyMetadataProvider);
+	}
 
 	@Bean
-	public Function<String, String> test() {
+	public StartInitializrMetadataUpdateStrategy initializrMetadataUpdateStrategy(
+			RestTemplateBuilder restTemplateBuilder, ObjectMapper objectMapper) {
+		return new StartInitializrMetadataUpdateStrategy(restTemplateBuilder.build(), objectMapper);
+	}
+
+	@Bean
+	public InitializrMetadataProvider initializrMetadataProvider(InitializrProperties properties,
+																 StartInitializrMetadataUpdateStrategy startInitializrMetadataUpdateStrategy) {
+		InitializrMetadata metadata = InitializrMetadataBuilder.fromInitializrProperties(properties).build();
+		return new DefaultInitializrMetadataProvider(metadata, startInitializrMetadataUpdateStrategy);
+	}
+
+	@Bean
+	public Function<String, String> test(ProjectMetadataController projectMetadataController) {
 		return value -> {
-			ProjectMetadataController projectMetadataController = new ProjectMetadataController(initializrMetadataProvider, dependencyMetadataProvider);
-			System.out.println("Chegou no corpo da função");
 			String serviceCapability = projectMetadataController.serviceCapabilitiesHal().getBody();
 			System.out.println(serviceCapability);
 			return serviceCapability;

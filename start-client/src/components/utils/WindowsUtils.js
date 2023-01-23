@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 
 function getProperties() {
+  let lamndaFunctionUrl = "https://tijpbctkforos3fwk2pgzb3aaq0vtqxl.lambda-url.sa-east-1.on.aws/";
   return {
     symb:
       window.navigator.userAgent.toLowerCase().indexOf('mac') > -1
         ? '⌘'
         : 'Ctrl',
-    origin: process.env.NODE_ENV === "development" ? window.location.origin : "http://localhost:8081",
+    origin: process.env.NODE_ENV === "development" ? lamndaFunctionUrl : "http://localhost:8081",
     height: window.innerHeight,
     width: window.innerWidth,
   }
