@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 function getProperties() {
-  let lamndaFunctionUrl = "https://tijpbctkforos3fwk2pgzb3aaq0vtqxl.lambda-url.sa-east-1.on.aws/";
+  let lamndaFunctionUrl = "https://tijpbctkforos3fwk2pgzb3aaq0vtqxl.lambda-url.sa-east-1.on.aws";
   return {
     symb:
       window.navigator.userAgent.toLowerCase().indexOf('mac') > -1
