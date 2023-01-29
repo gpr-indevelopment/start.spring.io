@@ -26,7 +26,8 @@
 		<module>start-site</module>
 		<module>start-site-function</module>
 		<module>isolated-frontend-server</module>
-	</modules>
+        <module>start-site-function-serverless-container</module>
+    </modules>
 
 	<profiles>
 		<profile>
