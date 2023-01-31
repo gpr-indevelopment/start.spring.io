@@ -13,6 +13,8 @@ management:
         include:
           - health
           - info
+          - beans
+          - metrics
 
 server:
   compression:
