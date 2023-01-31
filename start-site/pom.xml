@@ -76,6 +76,30 @@
 		<finalName>start-site</finalName>
 		<plugins>
 			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.40.3</version>
+				<executions>
+					<execution>
+						<id>docker-build</id>
+						<goals>
+							<goal>build</goal>
+						</goals>
+						<phase>package</phase>
+					</execution>
+				</executions>
+				<configuration>
+					<images>
+						<image>
+							<build>
+								<dockerFileDir>${project.basedir}</dockerFileDir>
+							</build>
+							<name>pimentgabriel/start-site</name>
+						</image>
+					</images>
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>io.spring.javaformat</groupId>
 				<artifactId>spring-javaformat-maven-plugin</artifactId>
 			</plugin>
