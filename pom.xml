@@ -25,8 +25,8 @@
 		<module>start-client</module>
 		<module>start-site</module>
 		<module>start-site-function</module>
-		<module>isolated-frontend-server</module>
-	</modules>
+        <module>gatling</module>
+    </modules>
 
 	<profiles>
 		<profile>
