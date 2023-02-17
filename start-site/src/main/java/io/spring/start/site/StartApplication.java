@@ -16,9 +16,6 @@
 
 package io.spring.start.site;
 
-import java.io.IOException;
-import java.nio.file.Files;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.spring.initializr.versionresolver.DependencyManagementVersionResolver;
 import io.spring.start.site.project.ProjectDescriptionCustomizerConfiguration;
@@ -34,6 +31,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.annotation.EnableAsync;
 
+import java.io.IOException;
+import java.nio.file.Files;
+
 /**
  * Initializr website application.
  *
@@ -41,7 +41,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
  */
 @EnableAutoConfiguration
 @SpringBootConfiguration
-@Import({ ProjectDescriptionCustomizerConfiguration.class, HttpTraceActuatorConfiguration.class })
+@Import({ ProjectDescriptionCustomizerConfiguration.class, HttpTraceActuatorConfiguration.class, StraceConfig.class })
 @EnableCaching
 @EnableAsync
 public class StartApplication {
