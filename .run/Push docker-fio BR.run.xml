@@ -1,0 +1,17 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Push docker-fio BR" type="ShConfigurationType">
+    <option name="SCRIPT_TEXT" value="docker image build -t 354991393457.dkr.ecr.sa-east-1.amazonaws.com/docker-fio:1.0 .; aws ecr get-login-password --region sa-east-1 --profile root-role | docker login --username AWS --password-stdin 354991393457.dkr.ecr.sa-east-1.amazonaws.com; docker image push 354991393457.dkr.ecr.sa-east-1.amazonaws.com/docker-fio:1.0" />
+    <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
+    <option name="SCRIPT_PATH" value="" />
+    <option name="SCRIPT_OPTIONS" value="" />
+    <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="false" />
+    <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$/docker-fio" />
+    <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
+    <option name="INTERPRETER_PATH" value="" />
+    <option name="INTERPRETER_OPTIONS" value="" />
+    <option name="EXECUTE_IN_TERMINAL" value="true" />
+    <option name="EXECUTE_SCRIPT_FILE" value="false" />
+    <envs />
+    <method v="2" />
+  </configuration>
+</component>
